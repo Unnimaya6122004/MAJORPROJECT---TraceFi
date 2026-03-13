@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact TraceFi</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<div class="page-shell">
+    <nav class="navbar">
+        <div class="logo">
+            <span class="brand-mark" aria-hidden="true">
+                <svg class="icon icon-lg" viewBox="0 0 24 24">
+                    <path d="M12 3 4 7v5c0 5 3.4 8.8 8 10 4.6-1.2 8-5 8-10V7l-8-4Z"></path>
+                    <path d="m9.5 12 1.7 1.7 3.8-4.2"></path>
+                </svg>
+            </span>
+            <span class="brand-text">
+                <span class="brand-name">TraceFi</span>
+                <span class="brand-subtitle">Threat Intelligence</span>
+            </span>
+        </div>
+        <ul class="nav-links">
+            <li><a href="/">Home</a></li>
+            <li><a href="/about">About</a></li>
+            <li><a href="/dashboard">Dashboard</a></li>
+            <li><a href="/contact" class="active">Contact</a></li>
+        </ul>
+    </nav>
+
+    <section class="section dashboard-hero">
+        <div class="container">
+            <span class="eyebrow">Get In Touch</span>
+            <h1 style="max-width: 11ch;">Talk to the team behind TraceFi</h1>
+            <p class="hero-copy">
+                Questions about deployment, security workflows, or product direction can be routed through the contact details below.
+            </p>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container contact-grid">
+            <article class="contact-card interactive-surface">
+                <div class="card-header">
+                    <div class="card-title-group">
+                        <span class="eyebrow">Message Us</span>
+                        <h2>Send a professional inquiry</h2>
+                    </div>
+                    <span class="icon-chip">
+                        <svg class="icon icon-lg" viewBox="0 0 24 24">
+                            <path d="M22 2 11 13"></path>
+                            <path d="m22 2-7 20-4-9-9-4 20-7Z"></path>
+                        </svg>
+                    </span>
+                </div>
+                <form>
+                    <div class="form-grid">
+                        <input class="input-control" type="text" placeholder="Your full name *">
+                        <input class="input-control" type="email" placeholder="your.email@company.com *">
+                    </div>
+                    <input class="input-control" type="text" placeholder="How can we help you? *" style="margin-top: 14px;">
+                    <textarea placeholder="Tell us more about your needs, environment, or current challenge." style="margin-top: 14px;"></textarea>
+                    <button type="button" style="margin-top: 18px; width: 100%;">
+                        <svg class="icon" viewBox="0 0 24 24">
+                            <path d="M22 2 11 13"></path>
+                            <path d="m22 2-7 20-4-9-9-4 20-7Z"></path>
+                        </svg>
+                        Send Message
+                    </button>
+                </form>
+            </article>
+
+            <div class="contact-stack">
+                <article class="contact-card interactive-surface">
+                    <div class="card-header">
+                        <div class="card-title-group">
+                            <span class="eyebrow">Contact Details</span>
+                            <h2>Reach the right channel</h2>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <span class="icon-chip">
+                            <svg class="icon" viewBox="0 0 24 24">
+                                <path d="M4 4h16v12H5.17L4 17.17V4Z"></path>
+                                <path d="m4 6 8 6 8-6"></path>
+                            </svg>
+                        </span>
+                        <div>
+                            <strong>Email</strong>
+                            <p>contact@tracefi.ai</p>
+                        </div>
+                    </div>
+                    <div class="contact-item" style="margin-top: 16px;">
+                        <span class="icon-chip success">
+                            <svg class="icon" viewBox="0 0 24 24">
+                                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07A19.5 19.5 0 0 1 5.15 12.8 19.8 19.8 0 0 1 2.08 4.09 2 2 0 0 1 4.06 2h3a2 2 0 0 1 2 1.72l.34 2.71a2 2 0 0 1-.57 1.73L7.1 9.91a16 16 0 0 0 7 7l1.75-1.73a2 2 0 0 1 1.73-.57l2.71.34A2 2 0 0 1 22 16.92Z"></path>
+                            </svg>
+                        </span>
+                        <div>
+                            <strong>Phone</strong>
+                            <p>+1 (555) 123-4567</p>
+                        </div>
+                    </div>
+                    <div class="contact-item" style="margin-top: 16px;">
+                        <span class="icon-chip warning">
+                            <svg class="icon" viewBox="0 0 24 24">
+                                <path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 0 1 16 0Z"></path>
+                                <circle cx="12" cy="10" r="3"></circle>
+                            </svg>
+                        </span>
+                        <div>
+                            <strong>Office</strong>
+                            <p>123 Cyber Security Blvd, Tech City, TC 12345</p>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="contact-card interactive-surface">
+                    <div class="card-header">
+                        <div class="card-title-group">
+                            <span class="eyebrow">Availability</span>
+                            <h2>Business hours and urgent support</h2>
+                        </div>
+                    </div>
+                    <ul class="detail-list">
+                        <li>
+                            <span class="icon-chip">
+                                <svg class="icon" viewBox="0 0 24 24">
+                                    <circle cx="12" cy="12" r="9"></circle>
+                                    <path d="M12 7v5l3 3"></path>
+                                </svg>
+                            </span>
+                            Monday to Friday: 9:00 AM to 6:00 PM
+                        </li>
+                        <li>
+                            <span class="icon-chip">
+                                <svg class="icon" viewBox="0 0 24 24">
+                                    <path d="M8 2v4"></path>
+                                    <path d="M16 2v4"></path>
+                                    <rect x="3" y="4" width="18" height="18" rx="2"></rect>
+                                    <path d="M3 10h18"></path>
+                                </svg>
+                            </span>
+                            Saturday: 10:00 AM to 4:00 PM
+                        </li>
+                    </ul>
+                    <div class="highlight-box" style="margin-top: 18px;">
+                        <strong style="color: var(--heading);">24/7 Emergency Support</strong>
+                        <p style="margin-top: 8px;">Critical security incidents can be escalated to the response team outside standard business hours.</p>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        &copy; 2026 TraceFi. Built for intelligent network defense.
+    </footer>
+</div>
+<script>
+document.querySelectorAll(".interactive-surface").forEach((surface) => {
+    surface.addEventListener("pointermove", (event) => {
+        const rect = surface.getBoundingClientRect();
+        surface.style.setProperty("--pointer-x", `${event.clientX - rect.left}px`);
+        surface.style.setProperty("--pointer-y", `${event.clientY - rect.top}px`);
+    });
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About TraceFi</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<div class="page-shell">
+    <nav class="navbar">
+        <div class="logo">
+            <span class="brand-mark" aria-hidden="true">
+                <svg class="icon icon-lg" viewBox="0 0 24 24">
+                    <path d="M12 3 4 7v5c0 5 3.4 8.8 8 10 4.6-1.2 8-5 8-10V7l-8-4Z"></path>
+                    <path d="m9.5 12 1.7 1.7 3.8-4.2"></path>
+                </svg>
+            </span>
+            <span class="brand-text">
+                <span class="brand-name">TraceFi</span>
+                <span class="brand-subtitle">Threat Intelligence</span>
+            </span>
+        </div>
+        <ul class="nav-links">
+            <li><a href="/">Home</a></li>
+            <li><a href="/about" class="active">About</a></li>
+            <li><a href="/dashboard">Dashboard</a></li>
+            <li><a href="/contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <section class="section dashboard-hero">
+        <div class="container">
+            <span class="eyebrow">Platform Overview</span>
+            <h1 style="max-width: 11ch;">Security intelligence built to stay ahead of DDoS threats</h1>
+            <p class="hero-copy">
+                TraceFi brings together detection, forecasting, and reporting so teams can identify incidents earlier and communicate them more clearly.
+            </p>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container info-grid">
+            <article class="contact-card interactive-surface">
+                <div class="card-header">
+                    <div class="card-title-group">
+                        <span class="eyebrow">Mission</span>
+                        <h2>Proactive defense, not reactive guesswork</h2>
+                    </div>
+                    <span class="icon-chip">
+                        <svg class="icon icon-lg" viewBox="0 0 24 24">
+                            <path d="M12 2v20"></path>
+                            <path d="m5 9 7-7 7 7"></path>
+                        </svg>
+                    </span>
+                </div>
+                <p>
+                    The platform is designed to help organizations interpret live network signals, detect active attacks, and forecast risk patterns before they turn into larger incidents.
+                </p>
+            </article>
+
+            <article class="contact-card interactive-surface">
+                <div class="card-header">
+                    <div class="card-title-group">
+                        <span class="eyebrow">Why It Matters</span>
+                        <h2>Confidence-backed decision support</h2>
+                    </div>
+                    <span class="icon-chip success">
+                        <svg class="icon icon-lg" viewBox="0 0 24 24">
+                            <path d="M3 12h6l2 5 4-10 2 5h4"></path>
+                        </svg>
+                    </span>
+                </div>
+                <p>
+                    Instead of surfacing raw classifications alone, TraceFi emphasizes confidence scores, attack type visibility, and summaries that help analysts prioritize the next step.
+                </p>
+            </article>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <div class="section-header">
+                <div>
+                    <span class="eyebrow">Core Features</span>
+                    <h2 style="margin-top: 16px;">What the platform delivers</h2>
+                </div>
+                <p class="section-intro">
+                    Each capability is reflected directly in the product UI so users can move from observation to action without context switching.
+                </p>
+            </div>
+
+            <div class="feature-grid">
+                <article class="feature-card interactive-surface">
+                    <span class="icon-chip">
+                        <svg class="icon icon-lg" viewBox="0 0 24 24">
+                            <path d="M3 11a9 9 0 1 1 18 0"></path>
+                            <path d="M12 11v4"></path>
+                            <path d="m15 8-3 3-3-3"></path>
+                        </svg>
+                    </span>
+                    <h3>Real-Time Detection</h3>
+                    <p>Flag suspicious flows as they happen with a presentation layer optimized for clarity during active monitoring.</p>
+                </article>
+
+                <article class="feature-card interactive-surface">
+                    <span class="icon-chip success">
+                        <svg class="icon icon-lg" viewBox="0 0 24 24">
+                            <path d="M21 21H3"></path>
+                            <path d="M7 16V8"></path>
+                            <path d="M12 16V4"></path>
+                            <path d="M17 16v-6"></path>
+                        </svg>
+                    </span>
+                    <h3>Predictive Forecasting</h3>
+                    <p>Understand evolving patterns through trend and distribution views that give context beyond single detections.</p>
+                </article>
+
+                <article class="feature-card interactive-surface">
+                    <span class="icon-chip warning">
+                        <svg class="icon icon-lg" viewBox="0 0 24 24">
+                            <rect x="3" y="4" width="18" height="14" rx="2"></rect>
+                            <path d="M8 20h8"></path>
+                            <path d="M12 18v2"></path>
+                        </svg>
+                    </span>
+                    <h3>Operator-Friendly Dashboard</h3>
+                    <p>Structured cards, metrics, and charts keep the interface readable for both technical and non-technical stakeholders.</p>
+                </article>
+
+                <article class="feature-card interactive-surface">
+                    <span class="icon-chip danger">
+                        <svg class="icon icon-lg" viewBox="0 0 24 24">
+                            <path d="M12 3 4 7v5c0 5 3.4 8.8 8 10 4.6-1.2 8-5 8-10V7l-8-4Z"></path>
+                            <path d="M9 12h6"></path>
+                            <path d="M12 9v6"></path>
+                        </svg>
+                    </span>
+                    <h3>Dual-Layer Architecture</h3>
+                    <p>Detection and forecasting work together to provide deeper operational awareness than isolated scoring alone.</p>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <div class="card interactive-surface">
+                <div class="section-header">
+                    <div>
+                        <span class="eyebrow">Technology Stack</span>
+                        <h2 style="margin-top: 16px;">Built on data science and security workflows</h2>
+                    </div>
+                </div>
+                <div class="info-grid">
+                    <div>
+                        <h3 style="margin-bottom: 16px;">Detection Layer</h3>
+                        <ul class="detail-list">
+                            <li>
+                                <span class="icon-chip">
+                                    <svg class="icon" viewBox="0 0 24 24">
+                                        <path d="M21 16V8"></path>
+                                        <path d="M18 12H9"></path>
+                                        <path d="M15 9l3 3-3 3"></path>
+                                        <path d="M3 8v8"></path>
+                                        <path d="M6 12h9"></path>
+                                        <path d="m9 15-3-3 3-3"></path>
+                                    </svg>
+                                </span>
+                                Deep learning and anomaly analysis for suspicious flow recognition
+                            </li>
+                            <li>
+                                <span class="icon-chip">
+                                    <svg class="icon" viewBox="0 0 24 24">
+                                        <circle cx="12" cy="12" r="8"></circle>
+                                        <path d="M12 8v4l3 3"></path>
+                                    </svg>
+                                </span>
+                                Real-time scoring pipelines for immediate classification feedback
+                            </li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 style="margin-bottom: 16px;">Forecasting Layer</h3>
+                        <ul class="detail-list">
+                            <li>
+                                <span class="icon-chip success">
+                                    <svg class="icon" viewBox="0 0 24 24">
+                                        <path d="M3 3v18h18"></path>
+                                        <path d="m19 9-5 5-4-4-3 3"></path>
+                                    </svg>
+                                </span>
+                                Trend analysis for anticipating future attack activity
+                            </li>
+                            <li>
+                                <span class="icon-chip success">
+                                    <svg class="icon" viewBox="0 0 24 24">
+                                        <path d="M12 22c5-2 8-6 8-10V5l-8-3-8 3v7c0 4 3 8 8 10Z"></path>
+                                        <path d="M9 12h6"></path>
+                                    </svg>
+                                </span>
+                                Risk-aware alerting and prioritization for response coordination
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        &copy; 2026 TraceFi. Built for intelligent network defense.
+    </footer>
+</div>
+<script>
+document.querySelectorAll(".interactive-surface").forEach((surface) => {
+    surface.addEventListener("pointermove", (event) => {
+        const rect = surface.getBoundingClientRect();
+        surface.style.setProperty("--pointer-x", `${event.clientX - rect.left}px`);
+        surface.style.setProperty("--pointer-y", `${event.clientY - rect.top}px`);
+    });
+});
+</script>
+</body>
+</html>

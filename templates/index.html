@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TraceFi | DDoS Detection Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+<div class="page-shell">
+    <nav class="navbar">
+        <div class="logo">
+            <span class="brand-mark" aria-hidden="true">
+                <svg class="icon icon-lg" viewBox="0 0 24 24">
+                    <path d="M12 3 4 7v5c0 5 3.4 8.8 8 10 4.6-1.2 8-5 8-10V7l-8-4Z"></path>
+                    <path d="m9.5 12 1.7 1.7 3.8-4.2"></path>
+                </svg>
+            </span>
+            <span class="brand-text">
+                <span class="brand-name">TraceFi</span>
+                <span class="brand-subtitle">Threat Intelligence</span>
+            </span>
+        </div>
+        <ul class="nav-links">
+            <li><a href="/">Home</a></li>
+            <li><a href="/about">About</a></li>
+            <li><a href="/dashboard" class="active">Dashboard</a></li>
+            <li><a href="/contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <section class="section dashboard-hero">
+        <div class="container">
+            <span class="eyebrow">Security Operations Dashboard</span>
+            <h1 style="max-width: 12ch;">Real-time DDoS monitoring with analyst-ready reporting</h1>
+            <p class="hero-copy">
+                Run live simulations, observe attack patterns, and export structured incident reports from a cleaner, more professional control surface.
+            </p>
+
+            <div id="alert-box" class="alert normal">
+                <span id="alert-icon" class="alert-icon" aria-hidden="true">
+                    <svg class="icon icon-lg" viewBox="0 0 24 24">
+                        <circle cx="12" cy="12" r="9"></circle>
+                        <path d="m9 12 2 2 4-4"></path>
+                    </svg>
+                </span>
+                <div class="alert-copy">
+                    <span class="alert-label">System Status</span>
+                    <span id="alert-message" class="alert-message">All monitored traffic is currently operating within normal thresholds.</span>
+                </div>
+            </div>
+
+            <audio id="sos-audio" loop>
+                <source src="{{ url_for('static', filename='alarm.wav') }}" type="audio/wav">
+            </audio>
+
+            <div class="action-row">
+                <button onclick="runDetection()">
+                    <svg class="icon" viewBox="0 0 24 24">
+                        <path d="M13 2 3 14h7l-1 8 10-12h-7l1-8Z"></path>
+                    </svg>
+                    Run Detection
+                </button>
+                <button class="button-info" onclick="downloadReport()">
+                    <svg class="icon" viewBox="0 0 24 24">
+                        <path d="M12 3v12"></path>
+                        <path d="m7 10 5 5 5-5"></path>
+                        <path d="M5 21h14"></path>
+                    </svg>
+                    Download Attack Report
+                </button>
+                <button id="ack-btn" class="button-danger" onclick="acknowledgeAlert()" style="display:none;">
+                    <svg class="icon" viewBox="0 0 24 24">
+                        <path d="M18 6 6 18"></path>
+                        <path d="m6 6 12 12"></path>
+                    </svg>
+                    Acknowledge Alert
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container dashboard-overview">
+            <article class="card operations-card interactive-surface">
+                <div class="card-header">
+                    <div class="card-title-group">
+                        <h2>Operations Overview</h2>
+                        <p>Current monitoring posture, latest system output, and the primary metrics analysts watch during active review.</p>
+                    </div>
+                    <span id="status-pill" class="status-pill success">
+                        <svg class="icon" viewBox="0 0 24 24">
+                            <circle cx="12" cy="12" r="9"></circle>
+                            <path d="m9 12 2 2 4-4"></path>
+                        </svg>
+                        Monitoring
+                    </span>
+                </div>
+                <div class="metric-grid">
+                    <article class="metric-card interactive-surface">
+                        <span class="metric-label">Total Flows Analyzed</span>
+                        <div id="total-flows" class="metric-value">0</div>
+                        <p class="metric-note">Cumulative simulated network traffic processed.</p>
+                    </article>
+                    <article class="metric-card interactive-surface">
+                        <span class="metric-label">DDoS Attacks Detected</span>
+                        <div id="ddos-count" class="metric-value">0</div>
+                        <p class="metric-note">High-confidence detections across all observed flows.</p>
+                    </article>
+                    <article class="metric-card interactive-surface">
+                        <span class="metric-label">Detection Rate</span>
+                        <div id="detection-rate" class="metric-value">0%</div>
+                        <p class="metric-note">Share of processed traffic identified as malicious.</p>
+                    </article>
+                </div>
+
+                <div class="operations-shell">
+                    <div class="ops-panel">
+                        <h3>Live Monitoring State</h3>
+                        <p id="status">Monitoring network traffic</p>
+                    </div>
+                    <div class="ops-grid">
+                        <div class="ops-mini">
+                            <span class="ops-mini-label">Latest Prediction</span>
+                            <span id="prediction" class="ops-mini-value">---</span>
+                        </div>
+                        <div class="ops-mini">
+                            <span class="ops-mini-label">Attack Type</span>
+                            <span id="attack-type" class="ops-mini-value">---</span>
+                        </div>
+                        <div class="ops-mini">
+                            <span class="ops-mini-label">Confidence</span>
+                            <span id="confidence" class="ops-mini-value">---</span>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <article class="report-card summary-card interactive-surface">
+                <div class="card-header">
+                    <div class="card-title-group">
+                        <h2>Incident Report</h2>
+                        <p>Exportable evidence package for auditing, review, and incident handoff.</p>
+                    </div>
+                    <span class="icon-chip warning">
+                        <svg class="icon icon-lg" viewBox="0 0 24 24">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"></path>
+                            <path d="M14 2v6h6"></path>
+                            <path d="M8 13h8"></path>
+                            <path d="M8 17h6"></path>
+                        </svg>
+                    </span>
+                </div>
+                <p>The report includes timestamped detections, attack categories, confidence scores, and severity summaries.</p>
+                <div class="summary-list">
+                    <div class="summary-row">
+                        <span class="label">Format</span>
+                        <span class="value">ZIP archive</span>
+                    </div>
+                    <div class="summary-row">
+                        <span class="label">Contents</span>
+                        <span class="value">CSV log + summary</span>
+                    </div>
+                    <div class="summary-row">
+                        <span class="label">Best For</span>
+                        <span class="value">Audits and forensics</span>
+                    </div>
+                </div>
+                <div class="report-actions">
+                    <span class="report-chip">ZIP Archive</span>
+                    <span class="report-chip">Excel Workbook</span>
+                    <span class="report-chip span-2">Executive Summary</span>
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container dashboard-grid">
+
+            <article class="chart-card span-6 compact interactive-surface">
+                <div class="card-header">
+                    <div class="card-title-group">
+                        <h2>Attack Distribution</h2>
+                        <p>Breakdown of detected malicious traffic by attack type.</p>
+                    </div>
+                </div>
+                <canvas id="attackChart"></canvas>
+            </article>
+
+            <article class="chart-card span-6 compact interactive-surface">
+                <div class="card-header">
+                    <div class="card-title-group">
+                        <h2>Traffic Composition</h2>
+                        <p>Normal versus malicious flow share across the session.</p>
+                    </div>
+                </div>
+                <canvas id="trafficChart"></canvas>
+            </article>
+
+            <article class="chart-card span-7 tall interactive-surface">
+                <div class="card-header">
+                    <div class="card-title-group">
+                        <h2>Detection Trend</h2>
+                        <p>Cumulative detection activity over the simulated monitoring sequence.</p>
+                    </div>
+                </div>
+                <canvas id="trendChart"></canvas>
+            </article>
+
+            <article class="chart-card span-5 tall interactive-surface">
+                <div class="card-header">
+                    <div class="card-title-group">
+                        <h2>Confidence Distribution</h2>
+                        <p>How recent DDoS detections are distributed by confidence band.</p>
+                    </div>
+                </div>
+                <canvas id="confidenceChart"></canvas>
+            </article>
+        </div>
+    </section>
+
+    <footer>
+        &copy; 2026 TraceFi. Built for intelligent network defense.
+    </footer>
+</div>
+
+<script>
+const chartPalette = {
+    primary: "#38bdf8",
+    primaryFill: "rgba(56, 189, 248, 0.16)",
+    success: "#22c55e",
+    danger: "#ef4444",
+    warning: "#f59e0b",
+    accent: "#10b981",
+    text: "#cbd5e1",
+    grid: "rgba(148, 163, 184, 0.12)"
+};
+
+let attackCounts = {};
+let normalCount = 0;
+let ddosCount = 0;
+
+let attackChart = null;
+let trafficChart = null;
+let trendChart = null;
+let confidenceChart = null;
+
+let trendData = [];
+let flowIndex = 0;
+
+let confidenceBuckets = {
+    "0.7 - 0.8": 0,
+    "0.8 - 0.9": 0,
+    "0.9 - 1.0": 0
+};
+
+const alertIconNormal = `
+    <svg class="icon icon-lg" viewBox="0 0 24 24">
+        <circle cx="12" cy="12" r="9"></circle>
+        <path d="m9 12 2 2 4-4"></path>
+    </svg>
+`;
+
+const alertIconDanger = `
+    <svg class="icon icon-lg" viewBox="0 0 24 24">
+        <path d="M12 3 2 21h20L12 3Z"></path>
+        <path d="M12 9v4"></path>
+        <path d="M12 17h.01"></path>
+    </svg>
+`;
+
+const statusIconMonitoring = `
+    <svg class="icon" viewBox="0 0 24 24">
+        <circle cx="12" cy="12" r="9"></circle>
+        <path d="m9 12 2 2 4-4"></path>
+    </svg>
+`;
+
+const statusIconAlert = `
+    <svg class="icon" viewBox="0 0 24 24">
+        <path d="M12 3 2 21h20L12 3Z"></path>
+        <path d="M12 9v4"></path>
+        <path d="M12 17h.01"></path>
+    </svg>
+`;
+
+function applyChartTheme(options = {}) {
+    return {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+            legend: {
+                labels: { color: chartPalette.text }
+            },
+            ...options.plugins
+        },
+        scales: options.scales || {
+            x: {
+                ticks: { color: chartPalette.text },
+                grid: { color: chartPalette.grid }
+            },
+            y: {
+                beginAtZero: true,
+                ticks: { color: chartPalette.text },
+                grid: { color: chartPalette.grid }
+            }
+        }
+    };
+}
+
+function runDetection() {
+    fetch("/simulate", { method: "POST" })
+        .then(res => res.json())
+        .then(data => {
+            const alertBox = document.getElementById("alert-box");
+            const alertMessage = document.getElementById("alert-message");
+            const alertIcon = document.getElementById("alert-icon");
+            const status = document.getElementById("status");
+            const statusPill = document.getElementById("status-pill");
+            const alarm = document.getElementById("sos-audio");
+            const ackBtn = document.getElementById("ack-btn");
+
+            document.getElementById("prediction").innerText = data.prediction;
+            document.getElementById("attack-type").innerText = data.attack_type;
+            document.getElementById("confidence").innerText = data.confidence;
+            document.getElementById("total-flows").innerText = data.total_flows;
+            document.getElementById("ddos-count").innerText = data.ddos_detected;
+            document.getElementById("detection-rate").innerText = data.detection_rate + "%";
+
+            flowIndex += 1;
+            trendData.push(data.ddos_detected);
+
+            if (data.prediction.includes("DDoS")) {
+                ddosCount += 1;
+                updateAttackChart(data.attack_type);
+                updateConfidenceChart(parseFloat(data.confidence));
+
+                alertBox.className = "alert danger";
+                alertMessage.innerText = "High-priority DDoS activity detected. Review the incident details and export the report if needed.";
+                alertIcon.innerHTML = alertIconDanger;
+
+                status.innerText = "Threat detected and awaiting acknowledgement";
+                statusPill.className = "status-pill danger";
+                statusPill.innerHTML = `${statusIconAlert} Alert Active`;
+
+                alarm.play().catch(() => {});
+                ackBtn.style.display = "inline-flex";
+            } else {
+                normalCount += 1;
+                alertBox.className = "alert normal";
+                alertMessage.innerText = "All monitored traffic is currently operating within normal thresholds.";
+                alertIcon.innerHTML = alertIconNormal;
+
+                status.innerText = "Monitoring network traffic";
+                statusPill.className = "status-pill success";
+                statusPill.innerHTML = `${statusIconMonitoring} Monitoring`;
+            }
+
+            updateTrafficChart();
+            updateTrendChart();
+        });
+}
+
+function acknowledgeAlert() {
+    const alarm = document.getElementById("sos-audio");
+    alarm.pause();
+    alarm.currentTime = 0;
+    document.getElementById("ack-btn").style.display = "none";
+}
+
+function updateAttackChart(type) {
+    if (type === "Benign") return;
+
+    attackCounts[type] = (attackCounts[type] || 0) + 1;
+
+    const labels = Object.keys(attackCounts);
+    const values = Object.values(attackCounts);
+
+    if (!attackChart) {
+        attackChart = new Chart(document.getElementById("attackChart"), {
+            type: "bar",
+            data: {
+                labels,
+                datasets: [{
+                    label: "Attacks",
+                    data: values,
+                    borderRadius: 10,
+                    backgroundColor: ["#ef4444", "#f97316", "#f59e0b", "#38bdf8", "#8b5cf6"]
+                }]
+            },
+            options: applyChartTheme({
+                plugins: {
+                    legend: { display: false }
+                }
+            })
+        });
+    } else {
+        attackChart.data.labels = labels;
+        attackChart.data.datasets[0].data = values;
+        attackChart.update();
+    }
+}
+
+function updateTrafficChart() {
+    if (!trafficChart) {
+        trafficChart = new Chart(document.getElementById("trafficChart"), {
+            type: "doughnut",
+            data: {
+                labels: ["Normal", "DDoS"],
+                datasets: [{
+                    data: [normalCount, ddosCount],
+                    backgroundColor: [chartPalette.success, chartPalette.danger],
+                    borderColor: "#08111f",
+                    borderWidth: 6
+                }]
+            },
+            options: applyChartTheme({
+                scales: {},
+                plugins: {
+                    legend: {
+                        position: "bottom",
+                        labels: { color: chartPalette.text }
+                    }
+                }
+            })
+        });
+    } else {
+        trafficChart.data.datasets[0].data = [normalCount, ddosCount];
+        trafficChart.update();
+    }
+}
+
+function updateTrendChart() {
+    if (!trendChart) {
+        trendChart = new Chart(document.getElementById("trendChart"), {
+            type: "line",
+            data: {
+                labels: [flowIndex],
+                datasets: [{
+                    label: "Cumulative DDoS Detections",
+                    data: trendData,
+                    borderColor: chartPalette.primary,
+                    backgroundColor: chartPalette.primaryFill,
+                    fill: true,
+                    tension: 0.35,
+                    pointRadius: 4,
+                    pointHoverRadius: 5
+                }]
+            },
+            options: applyChartTheme()
+        });
+    } else {
+        trendChart.data.labels.push(flowIndex);
+        trendChart.data.datasets[0].data = trendData;
+        trendChart.update();
+    }
+}
+
+function updateConfidenceChart(conf) {
+    if (conf >= 0.9) confidenceBuckets["0.9 - 1.0"]++;
+    else if (conf >= 0.8) confidenceBuckets["0.8 - 0.9"]++;
+    else confidenceBuckets["0.7 - 0.8"]++;
+
+    const labels = Object.keys(confidenceBuckets);
+    const values = Object.values(confidenceBuckets);
+
+    if (!confidenceChart) {
+        confidenceChart = new Chart(document.getElementById("confidenceChart"), {
+            type: "bar",
+            data: {
+                labels,
+                datasets: [{
+                    label: "Detections",
+                    data: values,
+                    borderRadius: 10,
+                    backgroundColor: [chartPalette.warning, chartPalette.primary, chartPalette.accent]
+                }]
+            },
+            options: applyChartTheme({
+                plugins: {
+                    legend: { display: false }
+                }
+            })
+        });
+    } else {
+        confidenceChart.data.datasets[0].data = values;
+        confidenceChart.update();
+    }
+}
+
+function downloadReport() {
+    window.location.href = "/download-report";
+}
+
+document.querySelectorAll(".interactive-surface").forEach((surface) => {
+    surface.addEventListener("pointermove", (event) => {
+        const rect = surface.getBoundingClientRect();
+        surface.style.setProperty("--pointer-x", `${event.clientX - rect.left}px`);
+        surface.style.setProperty("--pointer-y", `${event.clientY - rect.top}px`);
+    });
+});
+</script>
+</body>
+</html>

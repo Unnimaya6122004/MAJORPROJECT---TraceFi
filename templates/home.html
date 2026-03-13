@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TraceFi | AI Cyber Defense Platform</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<div class="page-shell">
+    <nav class="navbar">
+        <div class="logo">
+            <span class="brand-mark" aria-hidden="true">
+                <svg class="icon icon-lg" viewBox="0 0 24 24">
+                    <path d="M12 3 4 7v5c0 5 3.4 8.8 8 10 4.6-1.2 8-5 8-10V7l-8-4Z"></path>
+                    <path d="m9.5 12 1.7 1.7 3.8-4.2"></path>
+                </svg>
+            </span>
+            <span class="brand-text">
+                <span class="brand-name">TraceFi</span>
+                <span class="brand-subtitle">Threat Intelligence</span>
+            </span>
+        </div>
+        <ul class="nav-links">
+            <li><a href="/" class="active">Home</a></li>
+            <li><a href="/about">About</a></li>
+            <li><a href="/dashboard">Dashboard</a></li>
+            <li><a href="/contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <section class="hero">
+        <div class="container hero-grid">
+            <div class="hero-panel interactive-surface">
+                <span class="eyebrow">
+                    <svg class="icon" viewBox="0 0 24 24">
+                        <path d="M12 2v4"></path>
+                        <path d="m16.24 7.76 2.83-2.83"></path>
+                        <path d="M18 12h4"></path>
+                        <path d="m16.24 16.24 2.83 2.83"></path>
+                        <path d="M12 18v4"></path>
+                        <path d="m4.93 19.07 2.83-2.83"></path>
+                        <path d="M2 12h4"></path>
+                        <path d="m4.93 4.93 2.83 2.83"></path>
+                        <circle cx="12" cy="12" r="3"></circle>
+                    </svg>
+                    AI-Powered Network Defense
+                </span>
+                <h1>Professional security intelligence for <span>real-time DDoS defense</span></h1>
+                <p class="hero-copy">
+                    TraceFi combines live anomaly detection, attack classification, and confidence-driven reporting in a focused interface built for operators, analysts, and stakeholder reviews.
+                </p>
+                <div class="hero-buttons">
+                    <a class="button" href="/dashboard">
+                        <svg class="icon" viewBox="0 0 24 24">
+                            <path d="M3 12h18"></path>
+                            <path d="m13 5 7 7-7 7"></path>
+                        </svg>
+                        Launch Dashboard
+                    </a>
+                    <a class="button button-secondary" href="/about">
+                        <svg class="icon" viewBox="0 0 24 24">
+                            <circle cx="12" cy="12" r="9"></circle>
+                            <path d="M12 8h.01"></path>
+                            <path d="M11 12h1v4h1"></path>
+                        </svg>
+                        Explore Platform
+                    </a>
+                </div>
+                <div class="hero-meta">
+                    <div class="hero-summary interactive-surface">
+                        <p>
+                            <strong>Built for serious security workflows.</strong> TraceFi gives analysts one clean place to monitor incidents, understand confidence, and export evidence without unnecessary visual noise.
+                        </p>
+                    </div>
+                    <div class="hero-stats">
+                        <div class="stat-tile interactive-surface">
+                            <span class="stat-label">Monitoring Mode</span>
+                            <span class="stat-value">24/7</span>
+                        </div>
+                        <div class="stat-tile interactive-surface">
+                            <span class="stat-label">Response Focus</span>
+                            <span class="stat-value">Real-Time</span>
+                        </div>
+                        <div class="stat-tile interactive-surface">
+                            <span class="stat-label">Report Output</span>
+                            <span class="stat-value">ZIP + CSV</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section operator-section">
+        <div class="container operator-layout">
+            <article class="operator-panel interactive-surface">
+                <span class="eyebrow">Operator View</span>
+                <h2>Security teams get signal, not clutter.</h2>
+                <p>
+                    The operator experience is organized around fast comprehension, clean incident framing, and clear next actions instead of crowded hero content.
+                </p>
+            </article>
+
+            <div class="operator-grid">
+                <article class="operator-card interactive-surface">
+                    <span class="icon-chip">
+                        <svg class="icon icon-lg" viewBox="0 0 24 24">
+                            <path d="M3 3v18h18"></path>
+                            <path d="m19 9-5 5-4-4-3 3"></path>
+                        </svg>
+                    </span>
+                    <h3>Detection Visibility</h3>
+                    <p>Track attack counts, flow volume, and confidence signals through a focused dashboard layout.</p>
+                </article>
+
+                <article class="operator-card interactive-surface">
+                    <span class="icon-chip success">
+                        <svg class="icon icon-lg" viewBox="0 0 24 24">
+                            <path d="M12 21c4.97 0 9-4.03 9-9s-4.03-9-9-9-9 4.03-9 9 4.03 9 9 9Z"></path>
+                            <path d="m9 12 2 2 4-4"></path>
+                        </svg>
+                    </span>
+                    <h3>Actionable Alerts</h3>
+                    <p>Severity-aware incident states appear immediately so response teams can prioritize confidently.</p>
+                </article>
+
+                <article class="operator-card interactive-surface">
+                    <span class="icon-chip warning">
+                        <svg class="icon icon-lg" viewBox="0 0 24 24">
+                            <path d="M12 3 2 21h20L12 3Z"></path>
+                            <path d="M12 9v4"></path>
+                            <path d="M12 17h.01"></path>
+                        </svg>
+                    </span>
+                    <h3>Stakeholder Reporting</h3>
+                    <p>Generate downloadable evidence packages for audits, handoffs, and post-incident follow-up.</p>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <div class="section-header">
+                <div>
+                    <span class="eyebrow">Capabilities</span>
+                    <h2 style="margin-top: 16px;">Designed for modern cybersecurity operations</h2>
+                </div>
+                <p class="section-intro">
+                    The interface now emphasizes clarity, credible visual hierarchy, and operational metrics that feel appropriate for a professional security product.
+                </p>
+            </div>
+
+            <div class="feature-grid">
+                <article class="feature-card interactive-surface">
+                    <span class="icon-chip">
+                        <svg class="icon icon-lg" viewBox="0 0 24 24">
+                            <path d="M12 20V10"></path>
+                            <path d="m18 20-6-10-6 10"></path>
+                            <path d="M5 4h14"></path>
+                        </svg>
+                    </span>
+                    <h3>AI-Powered Detection</h3>
+                    <p>Model-backed classification identifies suspicious flow behavior with a presentation layer built for quick interpretation.</p>
+                </article>
+
+                <article class="feature-card interactive-surface">
+                    <span class="icon-chip success">
+                        <svg class="icon icon-lg" viewBox="0 0 24 24">
+                            <path d="M3 3v18h18"></path>
+                            <path d="m7 15 4-4 3 3 5-7"></path>
+                        </svg>
+                    </span>
+                    <h3>Predictive Analytics</h3>
+                    <p>Trend and confidence charts help teams understand how detections evolve over time, not just what happened last.</p>
+                </article>
+
+                <article class="feature-card interactive-surface">
+                    <span class="icon-chip warning">
+                        <svg class="icon icon-lg" viewBox="0 0 24 24">
+                            <path d="M13 2 3 14h7l-1 8 10-12h-7l1-8Z"></path>
+                        </svg>
+                    </span>
+                    <h3>Real-Time Response</h3>
+                    <p>Alerts, counts, and dashboards update instantly to support quick operational decisions under pressure.</p>
+                </article>
+
+                <article class="feature-card interactive-surface">
+                    <span class="icon-chip danger">
+                        <svg class="icon icon-lg" viewBox="0 0 24 24">
+                            <path d="M12 3 4 7v5c0 5 3.4 8.8 8 10 4.6-1.2 8-5 8-10V7l-8-4Z"></path>
+                            <path d="M12 8v4"></path>
+                            <path d="M12 16h.01"></path>
+                        </svg>
+                    </span>
+                    <h3>Dual-Layer Coverage</h3>
+                    <p>Detection plus forecasting provides a broader operational picture than single-signal monitoring tools.</p>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <div class="report-card interactive-surface">
+                <span class="eyebrow">Ready For Review</span>
+                <h2>Move from monitoring to action without leaving the platform.</h2>
+                <p>
+                    Use the live dashboard to simulate detection activity, review distributions and confidence levels, then export a structured attack report for follow-up analysis.
+                </p>
+                <div class="action-row">
+                    <a class="button" href="/dashboard">
+                        <svg class="icon" viewBox="0 0 24 24">
+                            <rect x="3" y="3" width="7" height="7" rx="1"></rect>
+                            <rect x="14" y="3" width="7" height="7" rx="1"></rect>
+                            <rect x="14" y="14" width="7" height="7" rx="1"></rect>
+                            <rect x="3" y="14" width="7" height="7" rx="1"></rect>
+                        </svg>
+                        Open Dashboard
+                    </a>
+                    <a class="button button-secondary" href="/contact">
+                        <svg class="icon" viewBox="0 0 24 24">
+                            <path d="M4 4h16v12H5.17L4 17.17V4Z"></path>
+                            <path d="m4 6 8 6 8-6"></path>
+                        </svg>
+                        Contact Team
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        &copy; 2026 TraceFi. Built for intelligent network defense.
+    </footer>
+</div>
+<script>
+document.querySelectorAll(".interactive-surface").forEach((surface) => {
+    surface.addEventListener("pointermove", (event) => {
+        const rect = surface.getBoundingClientRect();
+        surface.style.setProperty("--pointer-x", `${event.clientX - rect.left}px`);
+        surface.style.setProperty("--pointer-y", `${event.clientY - rect.top}px`);
+    });
+});
+</script>
+</body>
+</html>

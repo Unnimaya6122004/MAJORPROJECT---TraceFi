@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TraceFi Monitor</title>
+    <style>
+        :root {
+            --bg: #07111f;
+            --surface: rgba(10, 24, 45, 0.96);
+            --surface-soft: rgba(148, 163, 184, 0.08);
+            --border: rgba(148, 163, 184, 0.16);
+            --text: #f8fafc;
+            --muted: #94a3b8;
+            --primary: #38bdf8;
+            --accent: #22c55e;
+            --danger: #ef4444;
+            --warning: #f59e0b;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            width: 360px;
+            min-height: 480px;
+            font-family: "Manrope", "Segoe UI", sans-serif;
+            color: var(--text);
+            background:
+                radial-gradient(circle at top left, rgba(56, 189, 248, 0.18), transparent 30%),
+                radial-gradient(circle at bottom right, rgba(34, 197, 94, 0.14), transparent 28%),
+                linear-gradient(180deg, #091223 0%, #040917 100%);
+            overflow: hidden;
+        }
+
+        .popup-shell {
+            padding: 18px;
+        }
+
+        .popup-card {
+            position: relative;
+            overflow: hidden;
+            border-radius: 24px;
+            background: linear-gradient(180deg, rgba(10, 24, 45, 0.96), rgba(6, 13, 24, 0.94));
+            border: 1px solid var(--border);
+            box-shadow: 0 26px 60px rgba(2, 8, 23, 0.45);
+            padding: 20px;
+        }
+
+        .popup-card::before {
+            content: "";
+            position: absolute;
+            width: 180px;
+            height: 180px;
+            left: var(--pointer-x, 50%);
+            top: var(--pointer-y, 50%);
+            transform: translate(-50%, -50%);
+            background: radial-gradient(circle, rgba(103, 232, 249, 0.16), transparent 70%);
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.2s ease;
+        }
+
+        .popup-card:hover::before {
+            opacity: 1;
+        }
+
+        .header {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 20px;
+        }
+
+        .brand-mark {
+            width: 44px;
+            height: 44px;
+            border-radius: 14px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, rgba(56, 189, 248, 0.2), rgba(34, 197, 94, 0.16));
+            border: 1px solid rgba(56, 189, 248, 0.22);
+            color: #7dd3fc;
+            flex: 0 0 auto;
+        }
+
+        .brand-title {
+            font-size: 1.8rem;
+            font-weight: 800;
+            letter-spacing: -0.03em;
+        }
+
+        .brand-subtitle {
+            margin-top: 2px;
+            color: var(--muted);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            font-weight: 700;
+        }
+
+        .status {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 14px 16px;
+            border-radius: 16px;
+            border: 1px solid transparent;
+            font-weight: 800;
+            margin-bottom: 18px;
+        }
+
+        .status.normal {
+            background: rgba(34, 197, 94, 0.14);
+            border-color: rgba(34, 197, 94, 0.24);
+            color: #dcfce7;
+        }
+
+        .status.danger {
+            background: rgba(239, 68, 68, 0.16);
+            border-color: rgba(239, 68, 68, 0.28);
+            color: #fee2e2;
+        }
+
+        .status.warning {
+            background: rgba(245, 158, 11, 0.16);
+            border-color: rgba(245, 158, 11, 0.28);
+            color: #fef3c7;
+        }
+
+        .status-icon {
+            width: 38px;
+            height: 38px;
+            border-radius: 12px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.08);
+            flex: 0 0 auto;
+        }
+
+        .eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 12px;
+            border-radius: 999px;
+            background: rgba(56, 189, 248, 0.1);
+            border: 1px solid rgba(56, 189, 248, 0.16);
+            color: #7dd3fc;
+            font-size: 0.72rem;
+            font-weight: 800;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        .metrics {
+            display: grid;
+            gap: 12px;
+            margin-top: 14px;
+        }
+
+        .metric {
+            padding: 14px 16px;
+            border-radius: 16px;
+            background: var(--surface-soft);
+            border: 1px solid rgba(148, 163, 184, 0.12);
+        }
+
+        .metric-label {
+            display: block;
+            color: var(--muted);
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        .metric-value {
+            display: block;
+            margin-top: 8px;
+            font-size: 1.15rem;
+            font-weight: 800;
+            color: var(--text);
+            word-break: break-word;
+        }
+
+        .actions {
+            display: grid;
+            gap: 10px;
+            margin-top: 18px;
+        }
+
+        button {
+            appearance: none;
+            border: 0;
+            width: 100%;
+            min-height: 48px;
+            border-radius: 14px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            font: inherit;
+            font-weight: 800;
+            cursor: pointer;
+            transition: transform 0.18s ease, box-shadow 0.18s ease, filter 0.18s ease;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            filter: brightness(1.03);
+        }
+
+        button:active {
+            transform: translateY(0) scale(0.985);
+        }
+
+        .btn-dashboard {
+            color: #03111f;
+            background: linear-gradient(135deg, #67e8f9, #38bdf8);
+            box-shadow: 0 14px 28px rgba(56, 189, 248, 0.24);
+        }
+
+        .btn-report {
+            color: #03111f;
+            background: linear-gradient(135deg, #86efac, #22c55e);
+            box-shadow: 0 14px 28px rgba(34, 197, 94, 0.22);
+        }
+
+        .icon {
+            width: 20px;
+            height: 20px;
+            stroke: currentColor;
+            stroke-width: 1.9;
+            fill: none;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+    </style>
+</head>
+<body>
+    <div class="popup-shell">
+        <div class="popup-card" id="popupCard">
+            <div class="header">
+                <span class="brand-mark" aria-hidden="true">
+                    <svg class="icon" viewBox="0 0 24 24">
+                        <path d="M12 3 4 7v5c0 5 3.4 8.8 8 10 4.6-1.2 8-5 8-10V7l-8-4Z"></path>
+                        <path d="m9.5 12 1.7 1.7 3.8-4.2"></path>
+                    </svg>
+                </span>
+                <div>
+                    <div class="brand-title">TraceFi</div>
+                    <div class="brand-subtitle">Extension Monitor</div>
+                </div>
+            </div>
+
+            <div id="statusBox" class="status normal">
+                <span id="statusIcon" class="status-icon" aria-hidden="true">
+                    <svg class="icon" viewBox="0 0 24 24">
+                        <circle cx="12" cy="12" r="9"></circle>
+                        <path d="m9 12 2 2 4-4"></path>
+                    </svg>
+                </span>
+                <span id="statusText">Checking system...</span>
+            </div>
+
+            <span class="eyebrow">Latest Detection</span>
+
+            <div class="metrics">
+                <div class="metric">
+                    <span class="metric-label">Attack Type</span>
+                    <span id="attackType" class="metric-value">---</span>
+                </div>
+                <div class="metric">
+                    <span class="metric-label">Confidence</span>
+                    <span id="confidence" class="metric-value">---</span>
+                </div>
+            </div>
+
+            <div class="actions">
+                <button class="btn-dashboard" id="openDashboard">
+                    <svg class="icon" viewBox="0 0 24 24">
+                        <rect x="3" y="3" width="7" height="7" rx="1"></rect>
+                        <rect x="14" y="3" width="7" height="7" rx="1"></rect>
+                        <rect x="14" y="14" width="7" height="7" rx="1"></rect>
+                        <rect x="3" y="14" width="7" height="7" rx="1"></rect>
+                    </svg>
+                    Open Dashboard
+                </button>
+
+                <button class="btn-report" id="downloadReport">
+                    <svg class="icon" viewBox="0 0 24 24">
+                        <path d="M12 3v12"></path>
+                        <path d="m7 10 5 5 5-5"></path>
+                        <path d="M5 21h14"></path>
+                    </svg>
+                    Download Report
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="popup.js"></script>
+</body>
+</html>
