@@ -1,0 +1,53 @@
+# Python cache / build artifacts
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+
+# IDE / editor files
+.vscode/
+.idea/
+*.suo
+*.user
+*.userossc
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Local environment / secrets
+.env
+.env.*
+
+# Notebook checkpoints and training notebooks
+.ipynb_checkpoints/
+*.ipynb
+
+# Logs and temporary files
+*.log
+*.tmp
+*.bak
+
+# Local generated reports / exports
+*.zip
+*.xlsx
+*.csv~
+
+# Large training datasets not required by the running Flask app
+dataset/
+
+# Optional local model experiments / duplicates
+tracefi_hybrid_model.h5
+tracefi_hybrid_model.keras
+tracefi_scaler.pkl
+tracefi_selected_features.pkl
