@@ -9,6 +9,7 @@ import joblib
 import pandas as pd
 from datetime import datetime
 import io
+import os
 import zipfile
 from openpyxl.utils import get_column_letter
 
@@ -300,4 +301,8 @@ def download_report():
 # Run Flask App
 # -------------------------------
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(
+        host="0.0.0.0",
+        port=int(os.getenv("PORT", 5000)),
+        debug=os.getenv("FLASK_DEBUG", "0") == "1"
+    )
